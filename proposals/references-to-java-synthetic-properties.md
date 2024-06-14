@@ -2,6 +2,7 @@
 
 * **Type**: Design proposal
 * **Author**: Pavel Mikhailovskii
+* **Contributors**: Nikita Bobko
 * **Status**: Proposed
 * **Prototype**: Supported under a flag in 1.3.70 and enabled by default in .gradle.kts. Preview in 1.8.20 with `-language-version 1.9`. Planned to be enabled by default in 2.1.
 * **Related issues**: [KT-8575](https://youtrack.jetbrains.com/issue/KT-8575), [KT-35933](https://youtrack.jetbrains.com/issue/KT-35933), [KT-54525](https://youtrack.jetbrains.com/issue/KT-54525), [KT-54770](https://youtrack.jetbrains.com/issue/KT-54770)
@@ -16,9 +17,11 @@ This document describes the known bugs and limitations of the current implementa
 
 ## Motivation
 
-The possibility to access Java synthetic properties the same way as properties defined in Kotlin is widely used in Kotlin/JVM.
-For the sake of language consistency, it would make sense to allow to obtain `KProperty` references to such properties
-similarly to Kotlin properties as well.
+By introducing the feature, we strive to reduce friction, and make the language more predictable and discoverable.
+Users expect that they can replace `obj.property` with `obj::property` to get the reference.
+It's disappointing to discover that the expectation breaks for synthetic properties, especially for newcomers who don't know (and shouldn't know) the difference between real and synthetic properties.
+
+Synthetic properties references also align good with a much more popular request to add the possibility to override synthetic properties [KT-6653](https://youtrack.jetbrains.com/issue/KT-6653).
 
 ## Context
 
